@@ -8,10 +8,16 @@ public class DryFruitsTester {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		DryFruitsDTO entity = new DryFruitsDTO(1,"dates" , "Kimia" ,"SaudiArabia" , 674 , "Amazon");
-		
+		DryFruitsDTO entity = new DryFruitsDTO(7, "walnuts", "nutri desire", "canada", 899, "Amazon");
+
 		DryFruitsDAO dao = new DryFruitsDaoImpl();
 		dao.save(entity);
+
+		dao.read(entity);
+
+		dao.update(entity);
+
+		dao.delete(entity);
 
 	}
 
