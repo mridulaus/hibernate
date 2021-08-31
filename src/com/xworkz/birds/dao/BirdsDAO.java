@@ -6,4 +6,8 @@ public interface BirdsDAO {
 int save(BirdEntity entity);
 
 BirdEntity readById(int id);
+void updateNameById(int id,String name);
+void deleteById(int id);
+
+
 }

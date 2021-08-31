@@ -7,11 +7,13 @@ import com.xworkz.birds.entity.BirdEntity;
 public class BirdTester {
 
 	public static void main(String[] args) {
-		BirdEntity entity = new BirdEntity(2, "parrot", 2, "green", "Hyacinth Macaw ", true, true, 3.1f, 2.3f);
+		BirdEntity ent = new BirdEntity(7, "penguin", 2, "whit n black", "Emperor Penguine ", true, true, 2.1f, 2.0f);
 		
 		BirdsDAO dao = new BirdsDaoImpl();
-		dao.save(entity);
+//		dao.save(ent);
 		dao.readById(2);
+		dao.updateNameById(2, "swan");
+		dao.deleteById(1);
 	}
 
 }
