@@ -1,5 +1,8 @@
 package com.xworkz.camera.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,6 +18,7 @@ public class CameraDaoImpl implements CameraDAO {
 			Transaction transact = ref.beginTransaction();
 			int pk = (int) ref.save(entity);
 			transact.commit();
+			// transact.rollback();
 			System.out.println(pk);
 			return pk;
 		}
@@ -34,7 +38,7 @@ public class CameraDaoImpl implements CameraDAO {
 	public void update(int id) {
 		try (Session ref = fact.openSession()) {
 			Transaction transact = ref.beginTransaction();
-			CameraEntity entity = ref.get(CameraEntity.class,  id);
+			CameraEntity entity = ref.get(CameraEntity.class, id);
 			entity.setMemoryCardSize("256gb");
 			ref.update(entity);
 			ref.getTransaction().commit();
@@ -56,4 +60,32 @@ public class CameraDaoImpl implements CameraDAO {
 
 	}
 
+	@Override
+	public void saveList(List<CameraEntity> camEntity) {
+		try (Session session = fact.openSession()) {
+			Transaction trans = session.beginTransaction();
+			camEntity.forEach(entity -> {
+				session.save(entity);
+				System.out.println(entity);
+			});
+			trans.commit();
+		}
+
+	}
+
+	@Override
+	public void deleteList(List<Integer> id) {
+		try (Session session = fact.openSession()) {
+			Transaction trans = session.beginTransaction();
+			id.forEach(deleted -> {
+				//CameraEntity entity = session.get(CameraEntity.class, id);
+				session.delete(deleted);
+				session.flush();
+				System.out.println("delete the list   " + deleted);
+
+			});
+			trans.commit();
+		}
+
+	}
 }
